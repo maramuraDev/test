@@ -73,7 +73,7 @@
   <div id="custom-modal">
     <h2>Access to Motion Sensors</h2>
     <p>Please grant access to motion sensors to interact with the 360 video.</p>
-    <button class="custom-button" onclick="requestPermission()">Allow</button>
+    <button class="custom-button" onclick="grantPermission()">Allow</button>
     <button class="custom-button" onclick="denyPermission()">Deny</button>
   </div>
 
@@ -95,12 +95,17 @@
       // Hide the splash screen when the A-Frame scene is ready
     });
 
-    function requestPermission() {
-      var scene = document.querySelector('a-scene');
-      scene.addEventListener('loaded', function () {
-        document.exitPointerLock();
-        scene.requestPointerLock();
-      });
+    function grantPermission() {
+      console.log('Permission granted. You can now interact with the 360 video and AR experience.');
+
+      var v = document.querySelector('#vid');
+      v.play();
+      var splashScreen = document.getElementById('splash-screen');
+      splashScreen.style.display = 'none';
+      var camera = document.querySelector('a-camera');
+      camera.setAttribute('look-controls', 'enabled: true'); // Enable look-controls
+
+      closeCustomModal();
     }
 
     function denyPermission() {
@@ -108,21 +113,6 @@
       // Perform actions on permission denied
       closeCustomModal();
     }
-
-    document.querySelector('a-scene').addEventListener('deviceorientationpermissiongranted', function () {
-      // Handle permission granted
-      console.log('Permission granted. You can now interact with the 360 video and AR experience.');
-
-      var v = document.querySelector('#vid');
-      v.play();
-      var splashScreen = document.getElementById('splash-screen');
-      splashScreen.style.display = 'none';
-
-      var camera = document.querySelector('a-camera');
-      camera.setAttribute('look-controls', 'enabled: true');
-
-      closeCustomModal();
-    });
 
     function closeCustomModal() {
       var customModal = document.getElementById('custom-modal');

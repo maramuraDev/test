@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>360 Video Scene</title>
+  <title>Custom Modal for 360 Video</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <style>
     /* Styling for the splash screen */
@@ -27,17 +27,37 @@
       /* Add more styling as needed */
     }
 
-    /* Custom CSS for permission dialog modal */
-    .a-dialog-allow-button {
-      background-color: green;
+    /* Styling for the custom modal */
+    #custom-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      /* Ensures it's displayed on top of everything */
+      text-align: center;
     }
 
-    .a-dialog-deny-button {
-      background-color: red;
+    #custom-modal h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
     }
 
-    .a-dialog-ok-button {
-      background-color: blue;
+    /* Styling for the custom buttons */
+    .custom-button {
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -53,22 +73,21 @@
     </div>
   </div>
 
-  <a-scene>
-    <!-- Use the device-orientation-permission-ui component for permission dialogs -->
-    <a-entity device-orientation-permission-ui="enabled: true"></a-entity>
+  <!-- Custom modal for user access -->
+  <div id="custom-modal">
+    <h2>Access to Motion Sensors</h2>
+    <p>Please grant access to motion sensors to interact with the 360 video.</p>
+    <button class="custom-button" onclick="grantPermission()">Allow</button>
+    <button class="custom-button" onclick="denyPermission()">Deny</button>
+  </div>
 
+  <a-scene>
     <a-assets>
       <!-- 360 video source -->
-      <video id="vid" src="360.mp4" muted crossorigin="anonymous"></video>
+      <video id="vid" src="your-360-video.mp4" muted crossorigin="anonymous"></video>
     </a-assets>
 
     <a-videosphere rotation="0 180 0" src="#vid"></a-videosphere>
-
-    <!-- A simple event handler to react to permission events -->
-    <a-entity id="permission-handler" visible="false">
-      <a-entity event-set__allow="_event: deviceorientationpermissiongranted; visible: true;"></a-entity>
-      <a-entity event-set__deny="_event: deviceorientationpermissionrejected; visible: true;"></a-entity>
-    </a-entity>
   </a-scene>
 
   <script>
@@ -80,16 +99,22 @@
       splashScreen.style.display = 'none';
     });
 
-    // Event listeners for permission events
-    var permissionHandler = document.querySelector('#permission-handler');
-    permissionHandler.addEventListener('deviceorientationpermissiongranted', function () {
-      console.log('Permission to access motion sensors granted.');
-      // Additional actions on permission granted
-    });
-    permissionHandler.addEventListener('deviceorientationpermissionrejected', function () {
-      console.log('Permission to access motion sensors denied.');
-      // Additional actions on permission denied
-    });
+    function grantPermission() {
+      console.log('Permission granted. You can now interact with the 360 video.');
+      // Perform actions on permission granted
+      closeCustomModal();
+    }
+
+    function denyPermission() {
+      console.log('Permission denied. You wont be able to interact with the 360 video.');
+      // Perform actions on permission denied
+      closeCustomModal();
+    }
+
+    function closeCustomModal() {
+      var customModal = document.getElementById('custom-modal');
+      customModal.style.display = 'none';
+    }
   </script>
 </body>
 

@@ -1,50 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
-  <style>video{
-  width: 100%;
-  height:100%;
-}</style>
-  <meta charset="utf-8">
-  <title>360 Video</title>
-  <meta name="description" content="360 Video — A-Frame">
-<!--   <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
- -->
-<!--   <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
- -->
+  <meta charset="UTF-8">
+  <title>CodePen - On-Click A-Frame 360 Video (latest master) krpano</title>
 
 
-
-
-  <script
-    src="https://cdn.jsdelivr.net/gh/aframevr/aframe@cb0bb8407968be713b79008548b7044908ba5729/dist/aframe-master.min.js"></script>
 </head>
 
 <body>
-  <a-scene embedded arjs>
-    <a-assets>
-      <!--
-        SOURCE
-        Author: Bitmovin
-        URL:    https://bitmovin.com/demos/vr-360
-        -->
-      <video id="video" autoplay muted loop crossorigin="anonymous" playsinline webkit-playsinline src="360.mp4">
-      </video>
-    </a-assets>
-    <a-videosphere rotation="0 -90 0" src="#video">
-    </a-videosphere>
+  <!-- partial:index.partial.html -->
+  <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.min.js"></script>
 
-    <a-camera>
-      <a-entity position="0 0 -1.2" text="align:center;
-                width:6;
-                wrapCount:100;
-                color: white;
-                " hide-on-play="#video">
-      </a-entity>
-    </a-camera>
+
+  <a-scene>
+      <a-assets>
+         <video id='vid' src="https://krpano.com/krpanocloud/webvr/video/video-1920x960.mp4" muted crossorigin="anonymous" />
+      </a-assets>
+     <a-sky rotation="0 -90 0" src="#vid"></a-sky>
   </a-scene>
+
+  <script>
+    window.addEventListener('load', function () {
+      var v = document.querySelector('#vid');
+      v.play();
+      console.log('play');
+    });
+  </script>
+  <!-- partial -->
+
 </body>
 
 </html>

@@ -99,19 +99,21 @@
 
  function grantPermission() {
     console.log('Permission granted. You can now interact with the 360 video and AR experience.');
+   var v = document.querySelector('#vid');
+   v.play();
+   var splashScreen = document.getElementById('splash-screen');
 
+   splashScreen.style.display = 'none';
     // Add an event listener to update camera rotation as the user moves
+   
+         closeCustomModal();
+
+   
     document.addEventListener('deviceorientation', function (event) {
       // Adjust camera rotation based on device orientation
       cameraRotation += event.alpha;
       cameraRotation = cameraRotation % 360;
       document.querySelector('a-camera').setAttribute('rotation', `0 ${cameraRotation} 0`);
-
-                 var v = document.querySelector('#vid');
-      v.play();
-      var splashScreen = document.getElementById('splash-screen');
-
-      splashScreen.style.display = 'none';
     });}
 
     function denyPermission() {

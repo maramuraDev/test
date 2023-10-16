@@ -84,7 +84,7 @@
   <a-scene>
     <a-assets>
       <!-- 360 video source -->
-      <video id="vid" src="your-360-video.mp4" muted crossorigin="anonymous"></video>
+      <video id="vid" src="360.mp4" muted crossorigin="anonymous"></video>
     </a-assets>
 
     <a-videosphere rotation="0 180 0" src="#vid"></a-videosphere>
@@ -92,17 +92,20 @@
 
   <script>
     window.addEventListener('load', function () {
-      var v = document.querySelector('#vid');
-      v.play();
+ 
       // Hide the splash screen when the A-Frame scene is ready
       var splashScreen = document.getElementById('splash-screen');
-      splashScreen.style.display = 'none';
+      
     });
 
     function grantPermission() {
       console.log('Permission granted. You can now interact with the 360 video.');
       // Perform actions on permission granted
       closeCustomModal();
+           var v = document.querySelector('#vid');
+      v.play();
+            splashScreen.style.display = 'none';
+
     }
 
     function denyPermission() {

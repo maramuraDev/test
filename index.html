@@ -45,6 +45,7 @@
       margin-bottom: 10px;
     }
 
+    /* Styling for the custom buttons */
     .custom-button {
       padding: 10px 20px;
       margin: 10px;
@@ -73,11 +74,10 @@
   <div id="custom-modal">
     <h2>Access to Motion Sensors</h2>
     <p>Please grant access to motion sensors to interact with the 360 video.</p>
-    <button class="custom-button" onclick="grantPermission()">Allow</button>
-    <button class="custom-button" onclick="denyPermission()">Deny</button>
+    <button class="custom-button" onclick="requestPermission()">Request Access</button>
   </div>
 
-  <a-scene device-orientation-permission-ui="enabled: false">
+  <a-scene>
     <a-assets>
       <!-- 360 video source -->
       <video id="vid" src="360.mp4" muted crossorigin="anonymous"></video>
@@ -95,23 +95,27 @@
       // Hide the splash screen when the A-Frame scene is ready
     });
 
-    function grantPermission() {
-      console.log('Permission granted. You can now interact with the 360 video and AR experience.');
+    function requestPermission() {
+      if (typeof DeviceOrientationEvent !== 'undefined' && DeviceOrientationEvent.requestPermission) {
+        DeviceOrientationEvent.requestPermission()
+          .then(function (permissionState) {
+            if (permissionState === 'granted') {
+              console.log('Permission granted. You can now interact with the 360 video and AR experience.');
 
-      var v = document.querySelector('#vid');
-      v.play();
-      var splashScreen = document.getElementById('splash-screen');
-      splashScreen.style.display = 'none';
-      var camera = document.querySelector('a-camera');
-      camera.setAttribute('look-controls', 'enabled: true'); // Enable look-controls
+              var v = document.querySelector('#vid');
+              v.play();
+              var splashScreen = document.getElementById('splash-screen');
+              splashScreen.style.display = 'none';
 
-      closeCustomModal();
-    }
-
-    function denyPermission() {
-      console.log('Permission denied. You won\'t be able to interact with the 360 video.');
-      // Perform actions on permission denied
-      closeCustomModal();
+              closeCustomModal();
+            } else {
+              console.log('Permission denied. You won\'t be able to interact with the 360 video.');
+              // Perform actions on permission denied
+              closeCustomModal();
+            }
+          })
+          .catch(console.error);
+      }
     }
 
     function closeCustomModal() {

@@ -77,7 +77,7 @@
     <button class="custom-button" onclick="requestPermission()">Request Access</button>
   </div>
 
-  <a-scene>
+  <a-scene device-orientation-permission-ui="enabled: true">
     <a-assets>
       <!-- 360 video source -->
       <video id="vid" src="360.mp4" muted crossorigin="anonymous"></video>
@@ -96,26 +96,23 @@
     });
 
     function requestPermission() {
-      if (typeof DeviceOrientationEvent !== 'undefined' && DeviceOrientationEvent.requestPermission) {
-        DeviceOrientationEvent.requestPermission()
-          .then(function (permissionState) {
-            if (permissionState === 'granted') {
-              console.log('Permission granted. You can now interact with the 360 video and AR experience.');
+      var scene = document.querySelector('a-scene');
+      scene.addEventListener('deviceorientationpermissiongranted', function () {
+        console.log('Permission granted. You can now interact with the 360 video and AR experience.');
+        var v = document.querySelector('#vid');
+        v.play();
+        var splashScreen = document.getElementById('splash-screen');
+        splashScreen.style.display = 'none';
+        closeCustomModal();
+      });
 
-              var v = document.querySelector('#vid');
-              v.play();
-              var splashScreen = document.getElementById('splash-screen');
-              splashScreen.style.display = 'none';
+      scene.addEventListener('deviceorientationpermissionrejected', function () {
+        console.log('Permission denied. You won\'t be able to interact with the 360 video.');
+        // Perform actions on permission denied
+        closeCustomModal();
+      });
 
-              closeCustomModal();
-            } else {
-              console.log('Permission denied. You won\'t be able to interact with the 360 video.');
-              // Perform actions on permission denied
-              closeCustomModal();
-            }
-          })
-          .catch(console.error);
-      }
+      scene.requestPermission();
     }
 
     function closeCustomModal() {

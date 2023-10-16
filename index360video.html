@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>360 Video</title>
+    <meta name="description" content="360 Video — A-Frame">
+        <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@cb0bb8407968be713b79008548b7044908ba5729/dist/aframe-master.min.js"></script>
+  </head>
+
+<body>
+    <a-scene embedded arjs>
+        <a-assets>
+            <!--
+        SOURCE
+        Author: Bitmovin
+        URL:    https://bitmovin.com/demos/vr-360
+        -->
+            <video id="video" autoplay loop crossorigin="anonymous" playsinline webkit-playsinline
+                src="360.mp4">
+            </video>
+        </a-assets>
+        <a-videosphere rotation="0 -90 0" src="#video" >
+        </a-videosphere>
+
+        <a-camera>
+            <a-entity position="0 0 -1.5" text="align:center;
+                width:6;
+                wrapCount:100;
+                color: white;
+                " hide-on-play="#video">
+            </a-entity>
+        </a-camera>
+    </a-scene>
+</body>
+
+</html>

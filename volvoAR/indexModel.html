@@ -104,17 +104,17 @@
     <!-- Custom modal for user access -->
     <div id="custom-modal">
         <h2>Access to Motion Sensors</h2>
-        <p>Please grant access to motion sensors to interact with the 360 video.</p>
+        <p>Please grant access to motion sensors to interact with the 3D model.</p>
         <button class="custom-button" onclick="requestPermission()">Request Access</button>
     </div>
 
     <a-scene device-orientation-permission-ui="enabled: false" vr-mode-ui="enabled: false">
         <a-assets>
-            <!-- 360 video source -->
-            <video id="vid" src="360.mp4" muted crossorigin="anonymous"></video>
+            <!-- 3D model source -->
+            <a-asset-item id="model" src="model.gltf"></a-asset-item>
         </a-assets>
 
-        <a-sky rotation="0 180 0" src="#vid"></a-sky>
+        <a-entity gltf-model="#model" scale="0.5 0.5 0.5"></a-entity>
 
         <a-camera look-controls="enabled: false">
             <!-- Use look-controls for camera rotation -->
@@ -131,14 +131,12 @@
                 DeviceOrientationEvent.requestPermission()
                     .then(function (permissionState) {
                         if (permissionState === 'granted') {
-                            var v = document.querySelector('#vid');
-                            v.play();
                             var splashScreen = document.getElementById('splash-screen');
                             splashScreen.style.display = 'none';
                             enableCameraControls();
                             closeCustomModal();
                         } else {
-                            console.log('Permission denied. You won\'t be able to interact with the 360 video.');
+                            console.log('Permission denied. You won\'t be able to interact with the 3D model.');
                             // Perform actions on permission denied
                             closeCustomModal();
                         }

@@ -26,15 +26,6 @@
       font-size: 24px;
       /* Add more styling as needed */
     }
-
-    .a-enter-vr-modal {
-    background-color: #3498db;
-}
-
-/* Change the text color */
-.a-enter-vr-modal a-button {
-    color: #ffffff;
-}
   </style>
 </head>
 
@@ -49,7 +40,8 @@
     </div>
   </div>
 
-  <a-scene>
+  <a-scene
+    device-orientation-permission-ui="enabled: true, allowButtonText: 'Allow Motion Sensors', denyButtonText: 'Deny Motion Sensors', cancelButtonText: 'Cancel Motion Sensors', deviceMotionMessage: 'Please grant permission for motion sensors', mobileDesktopMessage: 'Switch to mobile mode for the best experience', httpsMessage: 'Please use a secure connection (HTTPS) for this experience'">
     <a-assets>
       <video id='vid' src="https://krpano.com/krpanocloud/webvr/video/video-1920x960.mp4" muted
         crossorigin="anonymous" />

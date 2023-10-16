@@ -88,33 +88,34 @@
     </a-assets>
 
     <a-sky rotation="0 180 0" src="#vid"></a-sky>
+    <a-camera rotation="0 0 0"> <!-- Initialize camera rotation here -->
+    </a-camera>
   </a-scene>
 
   <script>
     window.addEventListener('load', function () {
- 
       // Hide the splash screen when the A-Frame scene is ready
-      
     });
 
- function grantPermission() {
-    console.log('Permission granted. You can now interact with the 360 video and AR experience.');
-   var v = document.querySelector('#vid');
-   v.play();
-   var splashScreen = document.getElementById('splash-screen');
+    function grantPermission() {
+      console.log('Permission granted. You can now interact with the 360 video and AR experience.');
 
-   splashScreen.style.display = 'none';
-    // Add an event listener to update camera rotation as the user moves
-   
-         closeCustomModal();
+      var v = document.querySelector('#vid');
+      v.play();
+      var splashScreen = document.getElementById('splash-screen');
+      splashScreen.style.display = 'none';
 
-   
-    document.addEventListener('deviceorientation', function (event) {
-      // Adjust camera rotation based on device orientation
-      cameraRotation += event.alpha;
-      cameraRotation = cameraRotation % 360;
-      document.querySelector('a-camera').setAttribute('rotation', `0 ${cameraRotation} 0`);
-    });}
+      closeCustomModal();
+
+      // Add an event listener to update camera rotation as the user moves
+      let cameraRotation = 0;
+      document.addEventListener('deviceorientation', function (event) {
+        // Adjust camera rotation based on device orientation
+        cameraRotation += event.alpha;
+        cameraRotation = cameraRotation % 360;
+        document.querySelector('a-camera').setAttribute('rotation', `0 ${cameraRotation} 0`);
+      });
+    }
 
     function denyPermission() {
       console.log('Permission denied. You wont be able to interact with the 360 video.');

@@ -89,9 +89,9 @@
 
     <a-sky rotation="0 180 0" src="#vid"></a-sky>
 
-    <a-camera look-controls>
-      <!-- Use look-controls for camera rotation -->
-    </a-camera>
+  <a-camera look-controls="enabled: false">
+    <!-- Use look-controls for camera rotation -->
+  </a-camera>
   </a-scene>
 
   <script>
@@ -106,6 +106,8 @@
       v.play();
       var splashScreen = document.getElementById('splash-screen');
       splashScreen.style.display = 'none';
+      var camera = document.querySelector('a-camera');
+      camera.setAttribute('look-controls', 'enabled: true'); // Enable look-controls
 
       closeCustomModal();
     }

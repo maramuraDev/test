@@ -87,14 +87,13 @@
       <video id="vid" src="360.mp4" muted crossorigin="anonymous"></video>
     </a-assets>
 
-    <a-videosphere rotation="0 180 0" src="#vid"></a-videosphere>
+    <a-sky rotation="0 180 0" src="#vid"></a-sky>
   </a-scene>
 
   <script>
     window.addEventListener('load', function () {
  
       // Hide the splash screen when the A-Frame scene is ready
-      var splashScreen = document.getElementById('splash-screen');
       
     });
 
@@ -104,6 +103,8 @@
       closeCustomModal();
            var v = document.querySelector('#vid');
       v.play();
+            var splashScreen = document.getElementById('splash-screen');
+
             splashScreen.style.display = 'none';
 
     }

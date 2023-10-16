@@ -96,23 +96,34 @@
     });
 
     function requestPermission() {
-      var scene = document.querySelector('a-scene');
-      scene.addEventListener('deviceorientationpermissiongranted', function () {
-        console.log('Permission granted. You can now interact with the 360 video and AR experience.');
-        var v = document.querySelector('#vid');
-        v.play();
-        var splashScreen = document.getElementById('splash-screen');
-        splashScreen.style.display = 'none';
-        closeCustomModal();
-      });
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission()
+          .then(function (permissionState) {
+            if (permissionState === 'granted') {
+              var v = document.querySelector('#vid');
+              v.play();
+              var splashScreen = document.getElementById('splash-screen');
+              splashScreen.style.display = 'none';
+              enableCameraControls();
+              closeCustomModal();
+            } else {
+              console.log('Permission denied. You won\'t be able to interact with the 360 video.');
+              // Perform actions on permission denied
+              closeCustomModal();
+            }
+          })
+          .catch(function (error) {
+            console.error(error);
+            closeCustomModal();
+          });
+      } else {
+        console.log('DeviceOrientationEvent.requestPermission is not supported in this browser.');
+      }
+    }
 
-      scene.addEventListener('deviceorientationpermissionrejected', function () {
-        console.log('Permission denied. You won\'t be able to interact with the 360 video.');
-        // Perform actions on permission denied
-        closeCustomModal();
-      });
-
-      scene.requestPermission();
+    function enableCameraControls() {
+      var camera = document.querySelector('a-camera');
+      camera.setAttribute('look-controls', 'enabled: true');
     }
 
     function closeCustomModal() {

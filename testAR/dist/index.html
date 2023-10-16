@@ -13,17 +13,11 @@
 		<a-camera-static></a-camera-static>
 
 		<!-- Ground detection using hit-testing -->
-		<a-plane id="ground" position="0 0 -1" rotation="-90 0 0" width="10" height="10" visible="false"></a-plane>
-
+ 
 		<!-- Red box to be placed on the ground -->
-		<a-box id="red-box" position="0 0 0" scale="0.2 0.2 0.2" material="color: red"></a-box>
+		<a-box id="red-box" position="0 0 -2" scale="1 1 1" material="color: red"></a-box>
 
-		<!-- Listen for click event on the ground to place the red box -->
-		<a-entity cursor="rayOrigin: mouse" raycaster="objects: #ground" id="cursor">
-			<a-entity id="cursor-fuse" fuse="maxTimeout: 2000"
-				event-set__1="_event: mouseenter; _target: #cursor-fuse; visible: true"
-				event-set__2="_event: mouseleave; _target: #cursor-fuse; visible: false"></a-entity>
-		</a-entity>
+	 
 	</a-scene>
 </body>
 

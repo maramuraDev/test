@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>360 video</title>
-  <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+  <title>360 Video Scene</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <style>
     /* Styling for the splash screen */
     #splash-screen {
@@ -27,16 +27,18 @@
       /* Add more styling as needed */
     }
 
-        /* Custom CSS for permission dialog modal */
+    /* Custom CSS for permission dialog modal */
     .a-dialog-allow-button {
-      background-color: rgb(0, 55, 128);
-      color: white;
+      background-color: green;
     }
 
     .a-dialog-deny-button {
       background-color: red;
     }
- 
+
+    .a-dialog-ok-button {
+      background-color: blue;
+    }
   </style>
 </head>
 
@@ -51,14 +53,22 @@
     </div>
   </div>
 
-  <a-scene
-     device-orientation-permission-ui="enabled: true, deviceMotionMessage: 'Your custom message here'">
+  <a-scene>
+    <!-- Use the device-orientation-permission-ui component for permission dialogs -->
+    <a-entity device-orientation-permission-ui="enabled: true"></a-entity>
+
     <a-assets>
-      <video id='vid' src="https://krpano.com/krpanocloud/webvr/video/video-1920x960.mp4" muted
-        crossorigin="anonymous" ></video>
+      <!-- 360 video source -->
+      <video id="vid" src="360.mp4" muted crossorigin="anonymous"></video>
     </a-assets>
 
-    <a-sky rotation="0 -90 0" src="#vid"></a-sky>
+    <a-videosphere rotation="0 180 0" src="#vid"></a-videosphere>
+
+    <!-- A simple event handler to react to permission events -->
+    <a-entity id="permission-handler" visible="false">
+      <a-entity event-set__allow="_event: deviceorientationpermissiongranted; visible: true;"></a-entity>
+      <a-entity event-set__deny="_event: deviceorientationpermissionrejected; visible: true;"></a-entity>
+    </a-entity>
   </a-scene>
 
   <script>
@@ -69,9 +79,18 @@
       var splashScreen = document.getElementById('splash-screen');
       splashScreen.style.display = 'none';
     });
+
+    // Event listeners for permission events
+    var permissionHandler = document.querySelector('#permission-handler');
+    permissionHandler.addEventListener('deviceorientationpermissiongranted', function () {
+      console.log('Permission to access motion sensors granted.');
+      // Additional actions on permission granted
+    });
+    permissionHandler.addEventListener('deviceorientationpermissionrejected', function () {
+      console.log('Permission to access motion sensors denied.');
+      // Additional actions on permission denied
+    });
   </script>
 </body>
 
 </html>
-
- 

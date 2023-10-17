@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <title>Custom Modal for 360 Video</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Work+Sans:wght@200&display=swap"
         rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
+
+        
         /* Styling for the splash screen */
         #splash-screen {
             position: fixed;
@@ -17,24 +23,48 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgb(27, 27, 27);
-            background-image: url("./gifs/gradient2.svg");
+            background-color: rgb(255, 255, 255);
+/*             background-image: url("./gifs/background.png");
+ */            display: flex;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position-y:  bottom;
+            background-position-x:-100px ;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+            .back{
+                  position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("./gifs/background.png");
             display: flex;
             background-size: cover;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            opacity: .2;
+                background-position-y:  bottom;
+            background-position-x:-100px ;
         }
 
 
         h1 {
             width: 80%;
             position: absolute;
-            top: 75%;
+            top: 8%;
+            font-size: 6vw;
             text-align: center;
-            font-family: 'Work Sans', sans-serif;
-            font-weight: lighter;
-            color: white;
+            font-family: 'helvetica', sans-serif;
+            font-weight: normal;
+            color: rgb(50, 50, 50);
+        }
+
+        span{
+            font-weight: 600;
         }
 
         /* Styling for the branding content */
@@ -80,14 +110,97 @@
 
         .logo-animation {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: -30%;
-            background-image: url("./gifs/161023_VOLVO_SPLASH1.gif");
+            z-index: 9999;
+            width: 80%;
+            height: 10%;
+            top: 0%;
+            left: 10%;
+            background-image: url("./gifs/volvo.svg");
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
+         }
+
+
+            model-viewer {
+      width: 100%;
+      height: 100%;
+      top: 20%;
+      left: 0%;
+      transform: scale(1.6);
+    }
+
+        .block {
+      position: absolute;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+        #model-1 {
+            border: none;
+            background-size: contain;
+            background-color: #abbccf;
         }
+
+        #model-2 {
+            border: none;
+            background-size: contain;
+            background-color: transparent;
+            background-color: #b5ad42;
+        }
+
+        #model-3 {
+            border: none;
+            background-size: contain;
+            background-color: transparent;
+            background-color: #474747;
+        }
+
+        #model-4 {
+            border: none;
+            background-size: contain;
+            background-color: transparent;
+            background-color: #ffffff;
+        }
+
+         .controls {
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      left: 10%;
+       bottom: 33%;
+      transform: scale(.75);
+    }
+
+    .controls button {
+      width: 35px;
+      height: 35px;
+      border-radius: 35px;
+      border: .1px solid rgba(160, 160, 160, 0.111)
+    }
+
+    #ar-button {
+        background-color: rgba(22, 22, 22, 0.758);
+      background-size: contain;
+      position: absolute;
+      background-repeat: no-repeat;
+      left: 50%;
+      transform: translateX(-50%) scale(.7);
+      white-space: nowrap;
+      top: 20%;
+      padding: 0px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      border-radius: 10px;
+      height: 33px;
+      border: none;
+      display: block !important;
+      text-align: center;
+      width: 100px;
+      color: white;
+    }
+
     </style>
 </head>
 
@@ -95,71 +208,35 @@
 
     <!-- Splash Screen (HTML overlay) -->
     <div id="splash-screen">
+        <div class="back"></div>
         <div class="logo-animation"></div>
 
         <!-- Branding content -->
-        <h1>Enjoy The Experience</h1>
+        <h1>Descubre el nuevo <span>EX30</span></h1>
+            <model-viewer id="phone" class="block"  camera-controls disable-zoom shadow-intensity="1" interaction-prompt="none"
+                camera-controls exposure="1" camera-orbit="0deg 88deg 0"   environment-image=""
+                 src="./gifs/ex30.glb" ar ar-modes="webxr scene-viewer quick-look">
+                <button slot="ar-button" id="ar-button"> Activar AR</button>
+                <div class="controls block" id="color-controls">
+                    <button id="model-1" data-color="#abbccf"> </button>
+                    <button id="model-2" data-color="#FF0000"> </button>
+                    <button id="model-3" data-color="#FF0000"> </button>
+                    <button id="model-4" data-color="#FF0000"> </button>
+                </div>
+            </model-viewer>
     </div>
 
-    <!-- Custom modal for user access -->
-    <div id="custom-modal">
-        <h2>Access to Motion Sensors</h2>
-        <p>Please grant access to motion sensors to interact with the 3D model.</p>
-        <button class="custom-button" onclick="requestPermission()">Request Access</button>
-    </div>
+<script>
+    const modelViewer = document.querySelector("model-viewer#phone");
 
-    <a-scene device-orientation-permission-ui="enabled: false" vr-mode-ui="enabled: false">
-        <a-assets>
-            <!-- 3D model source -->
-            <a-asset-item id="model" src="model.gltf"></a-asset-item>
-        </a-assets>
-
-        <a-entity gltf-model="#model" scale="0.5 0.5 0.5"></a-entity>
-
-        <a-camera look-controls="enabled: false">
-            <!-- Use look-controls for camera rotation -->
-        </a-camera>
-    </a-scene>
-
-    <script>
-        window.addEventListener('load', function () {
-            // Hide the splash screen when the A-Frame scene is ready
+        document.querySelector('#color-controls').addEventListener('click', (event) => {
+            const colorString = event.target.dataset.color;
+            const carPaintMaterial = modelViewer.model.materials.find(material => material.name === 'carpaint');
+            carPaintMaterial.pbrMetallicRoughness.baseColorFactor = hexToRgb(colorString);
         });
+</script>
 
-        function requestPermission() {
-            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission()
-                    .then(function (permissionState) {
-                        if (permissionState === 'granted') {
-                            var splashScreen = document.getElementById('splash-screen');
-                            splashScreen.style.display = 'none';
-                            enableCameraControls();
-                            closeCustomModal();
-                        } else {
-                            console.log('Permission denied. You won\'t be able to interact with the 3D model.');
-                            // Perform actions on permission denied
-                            closeCustomModal();
-                        }
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                        closeCustomModal();
-                    });
-            } else {
-                console.log('DeviceOrientationEvent.requestPermission is not supported in this browser.');
-            }
-        }
-
-        function enableCameraControls() {
-            var camera = document.querySelector('a-camera');
-            camera.setAttribute('look-controls', 'enabled: true');
-        }
-
-        function closeCustomModal() {
-            var customModal = document.getElementById('custom-modal');
-            customModal.style.display = 'none';
-        }
-    </script>
+   
 </body>
 
 </html>

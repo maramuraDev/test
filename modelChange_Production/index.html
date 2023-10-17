@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+  <meta charset="UTF-8">
+  <meta name="ad.size" content="width=300,height=600">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+
+  <style>
+    #dartUrl_dc {
+      width: 1px;
+      height: 1px;
+      left: 0;
+      bottom: 0;
+    }
+
+    model-viewer {
+      --progress-bar-color: none;
+      --loader-background-color: transparent;
+    }
+
+    .block {
+      position: absolute;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+  .banner {
+      height: 600px;
+      width: 300px;
+      left: 0;
+      animation: fadein 1s ease;
+    }
+
+  
+ 
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+    video {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .video-end video {
+      transition: 1s;
+      visibility: hidden;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .block {
+      box-sizing: border-box;
+      position: absolute;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 100%;
+      transform: scale(1)
+    }
+
+    #ar-button {
+      background-image: url(ar.png);
+      background-size: contain;
+      position: absolute;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      right: 10px;
+      white-space: nowrap;
+      bottom: 180px;
+      padding: 0px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      height: 33px;
+      border: none;
+      display: block !important;
+      text-align: center;
+      width: 100px;
+    }
+
+    #bg-exit {
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: 12px;
+      background-color: transparent;
+      width: 150px;
+      height: 45px;
+      display: flex;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: 600;
+      background-image: url(./cta.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      left: 10%;
+      bottom: 110px
+    }
+
+    .controls button {
+      width: 35px;
+      height: 35px;
+      border-radius: 35px;
+      border: .1px solid rgba(160, 160, 160, 0.111)
+    }
+
+    .background {
+      top: 0px;
+      background-image: url(./background.png);
+      width: 300px;
+      height: 600px;
+      left: 0%;
+      z-index: -1;
+    }
+
+
+    #model-1 {
+      border: none;
+      background-size: contain;
+       background-image: url(button-variant-1.png);
+       background-color: transparent;
+      }
+
+    #model-2 {
+            border: none;
+
+       background-image: url(button-variant-2.png);
+      background-size: contain;
+             background-color: transparent;
+
+     }
+
+    #model-3 {
+      border: none;
+
+      background-image: url(button-variant-3.png);
+      background-size: contain;
+             background-color: transparent;
+
+     }
+
+    #model-4 {
+            border: none;
+
+      background-image: url(button-variant-4.png);
+      background-size: contain;
+             background-color: transparent;
+
+     }
+  </style>
+</head>
+
+<body>
+  <div class="banner block">
+    <img id="dartUrl_dc" class="block"></img>
+    <model-viewer id="phone" class="block" environment-image="autoshop.hdr" camera-controls touch-action="pan-y"
+      camera-orbit="45deg 80deg auto"
+        camera-controls camera-orbit="0m 0m 0m" field-of-view="8deg" camera-target="0m -.5m 0m"
+        max-camera-orbit="auto 90deg auto" 
+        min-camera-orbit="auto auto auto"  src="./campModel.glb" ar ar-modes="webxr scene-viewer quick-look">
+      <button slot="ar-button" id="ar-button"></button>
+      <div class="controls block">
+        <button id="model-1"> </button>
+        <button id="model-2"> </button>
+        <button id="model-3"> </button>
+        <button id="model-4"> </button>
+      </div>
+    </model-viewer>
+
+    <div class="block" id="bg-exit"></div>
+    <div class="background block"></div>
+   </div>
+
+  <script>
+    (function () {
+      Enabler.addEventListener(studio.events.StudioEvent.INIT, init);
+      if (Enabler.isInitialized()) {
+        init();
+      }
+    })();
+
+    var isInit = false;
+
+    function init() {
+      if (isInit) return;
+      isInit = true;
+      if (Enabler.isPageLoaded()) {
+        enablerInitHandler();
+      } else {
+        Enabler.addEventListener(studio.events.StudioEvent.PAGE_LOADED, enablerInitHandler);
+      }
+    };
+
+     function enablerInitHandler() {
+        var dartTagHolder = document.getElementById("dartUrl_dc");
+        var DART_TagURL = "";
+        dartTagHolder.src = DART_TagURL;
+        var video = document.getElementById("adVideo");
+        const modelViewer = document.querySelector("model-viewer#phone");
+        const model1 = document.querySelector("#model-1");
+        const model2 = document.querySelector("#model-2");
+        const model3 = document.querySelector("#model-3");
+        const model4 = document.querySelector("#model-4");
+        const exit = document.querySelector("#bg-exit");
+        const banner = document.querySelector(".banner");
+ 
+        model1.addEventListener("click", () => {
+          modelViewer.src = "campModel.glb";
+          Enabler.counter("Model 1 Clicked");
+        });
+        model2.addEventListener("click", () => {
+          modelViewer.src = "campModel2.glb";
+          Enabler.counter("Model 2 Clicked");
+        });
+        model3.addEventListener("click", () => {
+          modelViewer.src = "campModel3.glb";
+          Enabler.counter("Model 3 Clicked");
+        });
+        model4.addEventListener("click", () => {
+          modelViewer.src = "campModel4.glb";
+          Enabler.counter("Model 4 Clicked");
+        });
+        exit.addEventListener("click", () => {
+          Enabler.exit("Click on CTA", "");
+        });
+      }
+  </script>
+  </body>
+
+</html>

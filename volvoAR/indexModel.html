@@ -1,242 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Custom Modal for 360 Video</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <title>VOLVO EXPERIENCIA AR</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Work+Sans:wght@200&display=swap"
-        rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <style>
-
-        
-        /* Styling for the splash screen */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgb(255, 255, 255);
-/*             background-image: url("./gifs/background.png");
- */            display: flex;
-            background-size: auto 100%;
-            background-repeat: no-repeat;
-            background-position-y:  bottom;
-            background-position-x:-100px ;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-            .back{
-                  position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("./gifs/background.png");
-            display: flex;
-            background-size: cover;
-            justify-content: center;
-            align-items: center;
-            opacity: .2;
-                background-position-y:  bottom;
-            background-position-x:-100px ;
-        }
-
-
-        h1 {
-            width: 80%;
-            position: absolute;
-            top: 8%;
-            font-size: 6vw;
-            text-align: center;
-            font-family: 'helvetica', sans-serif;
-            font-weight: normal;
-            color: rgb(50, 50, 50);
-        }
-
-        span{
-            font-weight: 600;
-        }
-
-        /* Styling for the branding content */
-        #branding {
-            font-size: 24px;
-        }
-
-        /* Styling for the custom modal */
-        #custom-modal {
-            position: relative;
-            top: 50%;
-            width: 80%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #ffffff82;
-            padding: 20px;
-            border: .2px solid #cccccc53;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            text-align: center;
-            font-family: 'Barlow', sans-serif;
-        }
-
-        #custom-modal h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        /* Styling for the custom buttons */
-        .custom-button {
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            background-color: rgb(81, 63, 246);
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-family: 'Barlow', sans-serif;
-
-        }
-
-        .logo-animation {
-            position: absolute;
-            z-index: 9999;
-            width: 80%;
-            height: 10%;
-            top: 0%;
-            left: 10%;
-            background-image: url("./gifs/volvo.svg");
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-         }
-
-
-            model-viewer {
-      width: 100%;
-      height: 100%;
-      top: 20%;
-      left: 0%;
-      transform: scale(1.6);
-    }
-
-        .block {
-      position: absolute;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-        #model-1 {
-            border: none;
-            background-size: contain;
-            background-color: #abbccf;
-        }
-
-        #model-2 {
-            border: none;
-            background-size: contain;
-            background-color: transparent;
-            background-color: #b5ad42;
-        }
-
-        #model-3 {
-            border: none;
-            background-size: contain;
-            background-color: transparent;
-            background-color: #474747;
-        }
-
-        #model-4 {
-            border: none;
-            background-size: contain;
-            background-color: transparent;
-            background-color: #ffffff;
-        }
-
-         .controls {
-      display: flex;
-      justify-content: space-around;
-      width: 80%;
-      left: 10%;
-       bottom: 33%;
-      transform: scale(.75);
-    }
-
-    .controls button {
-      width: 35px;
-      height: 35px;
-      border-radius: 35px;
-      border: .1px solid rgba(160, 160, 160, 0.111)
-    }
-
-    #ar-button {
-        background-color: rgba(22, 22, 22, 0.758);
-      background-size: contain;
-      position: absolute;
-      background-repeat: no-repeat;
-      left: 50%;
-      transform: translateX(-50%) scale(.7);
-      white-space: nowrap;
-      top: 20%;
-      padding: 0px;
-      font-family: Roboto Regular, Helvetica Neue, sans-serif;
-      font-size: 14px;
-      border-radius: 10px;
-      height: 33px;
-      border: none;
-      display: block !important;
-      text-align: center;
-      width: 100px;
-      color: white;
-    }
-
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Work+Sans:wght@200&display=swap"rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-
-    <!-- Splash Screen (HTML overlay) -->
-    <div id="splash-screen">
-        <div class="back"></div>
-        <div class="logo-animation"></div>
-
-        <!-- Branding content -->
-        <h1>Descubre el nuevo <span>EX30</span></h1>
-            <model-viewer id="phone" class="block"  camera-controls disable-zoom shadow-intensity="1" interaction-prompt="none"
-                camera-controls exposure="1" camera-orbit="0deg 88deg 0"   environment-image=""
-                 src="./gifs/ex30.glb" ar ar-modes="webxr scene-viewer quick-look">
-                <button slot="ar-button" id="ar-button"> Activar AR</button>
-                <div class="controls block" id="color-controls">
-                    <button id="model-1" data-color="#abbccf"> </button>
-                    <button id="model-2" data-color="#FF0000"> </button>
-                    <button id="model-3" data-color="#FF0000"> </button>
-                    <button id="model-4" data-color="#FF0000"> </button>
-                </div>
-            </model-viewer>
+    <div id="app-container" class="block">
+        <div class="background block"></div>
+        <div class="brand-logo block"></div>
+        <h1 class="block">Descubre el nuevo <span>EX30</span></h1>
+        <model-viewer tone-mapping="commerce" id="phone" class="block" camera-controls disable-zoom shadow-intensity="1"
+            interaction-prompt="none" camera-controls exposure="1.2" camera-target="-.3m 0 0" camera-orbit="30deg 88deg 0" environment-image="neutral"
+            src="./assets/ex30.glb" ar ar-modes="webxr scene-viewer quick-look">
+            <button slot="ar-button" id="ar-button" class="block"> Activar AR</button>
+            <div class="controls block" id="color-controls">
+                <button id="model-1" data-color="#abbccf"> </button>
+                <button id="model-2" data-color="#FF0000"> </button>
+                <button id="model-3" data-color="#FF0000"> </button>
+                <button id="model-4" data-color="#FF0000"> </button>
+            </div>
+            <script>
+                const modelViewerColor = document.querySelector("model-viewer#phone");
+                
+                document.querySelector('#color-controls').addEventListener('click', (event) => {
+                  const colorString = event.target.dataset.color;
+                  const [material] = modelViewerColor.model.materials;
+                  material.pbrMetallicRoughness.setBaseColorFactor(colorString);
+                });
+                </script>
+        </model-viewer>
     </div>
 
-<script>
-    const modelViewer = document.querySelector("model-viewer#phone");
 
-        document.querySelector('#color-controls').addEventListener('click', (event) => {
-            const colorString = event.target.dataset.color;
-            const carPaintMaterial = modelViewer.model.materials.find(material => material.name === 'carpaint');
-            carPaintMaterial.pbrMetallicRoughness.baseColorFactor = hexToRgb(colorString);
-        });
-</script>
-
-   
 </body>
 
 </html>
+

@@ -1,0 +1,141 @@
+ /* Model & Video Screens */
+ #app-container {
+     top: 0;
+     left: 0;
+     width: 100%;
+     position: absolute;
+     height: 100%;
+     overflow-x: visible;
+     z-index: 99;
+     transform: scale(1);
+ }
+ body{overflow: hidden;width: 100%;height: 100%;}
+
+ .block {
+     position: absolute;
+     background-repeat: no-repeat;
+     background-position: center;
+     background-size: contain;
+ }
+
+ .background {
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: #ffffff;
+ }
+
+ .background::after {
+     content: "";
+     width: 100%;
+     height: 100%;
+     position: absolute;
+     background-size: auto 100%;
+     opacity: .2;
+      background-position-y: 0;
+     background-position-x: -100px;
+     background-image: url("./assets/background.jpg");
+ }
+
+ h1 {
+     width: 80%;
+     left: 10%;
+     top: 8%;
+     font-size: 6vw;
+     text-align: center;
+     font-family: 'helvetica', sans-serif;
+     font-weight: normal;
+     color: rgb(50, 50, 50);
+ }
+
+ span{font-weight:600}
+
+ .brand-logo {
+     width: 80%;
+     height: 10%;
+     top: 0%;
+     left: 10%;
+     background-image: url("./assets/volvo.svg");
+ }
+
+ /* Model Experience */
+ model-viewer {
+     width: 100%;
+     height: 100%;
+     top: 20%;
+     left: 0%;
+     transform: scale(1.2);
+     overflow: hidden;
+ }
+
+ .controls {
+     display: flex;
+     justify-content: space-around;
+     width: 80%;
+     left: 10%;
+     bottom: 33%;
+     transform: scale(.75);
+ }
+
+ .controls button {
+     width: 35px;
+     height: 35px;
+     border-radius: 35px;
+     border: .1px solid rgba(160, 160, 160, 0.111)
+ }
+
+ #model-1{background-color:#abbccf}
+ #model-2{background-color:#b5ad42}
+ #model-3{background-color:#474747}
+ #model-4{background-color:#ffffff}
+
+ #ar-button {
+     background-color: rgba(22, 22, 22, 0.758);
+     left: 50%;
+     transform: translateX(-50%) scale(.7);
+     white-space: nowrap;
+     top: 20%;
+     padding: 0px;
+     font-family: Roboto Regular, Helvetica Neue, sans-serif;
+     font-size: 14px;
+     border-radius: 10px;
+     height: 33px;
+     border: none;
+     text-align: center;
+     width: 100px;
+     color: white;
+ }
+
+ /* Video Experience */
+ #custom-modal {
+     top: 50%;
+     width: 80%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: #28272782;
+     padding: 20px;
+     border: .2px solid #cccccc53;
+     border-radius: 5px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+     z-index: 999999999;
+     text-align: center;
+     color: white;
+     font-family: 'Barlow', sans-serif;
+ }
+
+ #custom-modal h2 {
+     font-size: 24px;
+     margin-bottom: 10px;
+ }
+
+ .custom-button {
+     padding: 10px 20px;
+     margin: 10px;
+     background-color: rgb(81, 63, 246);
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     font-size: 16px;
+     font-family: 'Barlow', sans-serif;
+ }

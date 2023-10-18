@@ -15,12 +15,12 @@
 </head>
 
 
-<model-viewer camera-orbit="45deg 20deg auto" camera-controls touch-action="pan-y" autoplay src="./campModel.glb" ar alt="A 3D model of a Rocket Ship" >
+<model-viewer  exposure="2"camera-orbit="45deg 20deg auto" camera-controls touch-action="pan-y" autoplay src="./ex30.glb" ar alt="A 3D model of a Rocket Ship" >
   <effect-composer id="selectiveComposer" render-mode="quality">
-    <selective-bloom-effect strength="2" radius="0.2" threshold="0"></selective-bloom-effect>
-    <color-grade-effect></color-grade-effect>
+     <color-grade-effect tonemapping="UNCHARTED2" ></color-grade-effect>
+  </model-viewer>
+
   </effect-composer>
-</model-viewer>
 
 <script type="module">
     const selectiveComposer = document.querySelector("effect-composer#selectiveComposer");
@@ -28,7 +28,7 @@
     selectiveComposer.addEventListener('updated-selection', () => {
         const selection = [];
         selectiveComposer.selection.forEach((obj) => {
-            if (obj.material.name === "mat_glass_perfume.00") {
+            if (obj.material.name === "carpaint") {
                 selection.push(obj);
             }
         });

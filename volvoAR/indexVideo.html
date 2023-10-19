@@ -41,11 +41,9 @@
         DeviceOrientationEvent.requestPermission()
           .then(function (permissionState) {
             if (permissionState === 'granted') {
-              var v = document.querySelector('#vid');
-              v.play();
+            
               var splashScreen = document.getElementById('app-container');
               splashScreen.style.display = 'none';
-              splashScreen.style.display = 'block';
 
               enableCameraControls();
               closeCustomModal();

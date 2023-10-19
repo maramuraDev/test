@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>VOLVO EXPERIENCIA AR</title>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Work+Sans:wght@200&display=swap"rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>VOLVO EXPERIENCIA AR</title>
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
+    <script type="importmap">{ "imports":{ "three": "https://cdn.jsdelivr.net/npm/three@^0.156.1/build/three.module.min.js"}}</script>
+    <script type="module" src=" https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js "></script>
+    <script type="module" src=" https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js "></script>    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Work+Sans:wght@200&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
 </head>
 
@@ -16,29 +21,74 @@
         <div class="background block"></div>
         <div class="brand-logo block"></div>
         <h1 class="block">Descubre el nuevo <span>EX30</span></h1>
-        <model-viewer tone-mapping="commerce" id="phone" class="block" camera-controls disable-zoom shadow-intensity="1"
-            interaction-prompt="none" camera-controls exposure="1.2" camera-target="-.3m 0 0" camera-orbit="30deg 88deg 0" environment-image="neutral"
-            src="./assets/ex30.glb" ar ar-modes="webxr scene-viewer quick-look">
-            <button slot="ar-button" id="ar-button" class="block"> Activar AR</button>
-            <div class="controls block" id="color-controls">
-                <button id="model-1" data-color="#abbccf"> </button>
-                <button id="model-2" data-color="#FF0000"> </button>
-                <button id="model-3" data-color="#FF0000"> </button>
-                <button id="model-4" data-color="#FF0000"> </button>
-            </div>
-            <script>
-                const modelViewerColor = document.querySelector("model-viewer#phone");
-                
-                document.querySelector('#color-controls').addEventListener('click', (event) => {
-                  const colorString = event.target.dataset.color;
-                  const [material] = modelViewerColor.model.materials;
-                  material.pbrMetallicRoughness.setBaseColorFactor(colorString);
-                });
-                </script>
-        </model-viewer>
+       
+<model-viewer interaction-prompt="none" shadow-intensity="1.3" 
+exposure=".8" camera-orbit="35deg 90deg auto"   camera-target="-1.5m 0m 0m"  
+ field-of-view="80deg"  
+ environment-image="./assets/autoshop.hdr"
+autoplay src="./assets/latest22.glb" ar alt="A 3D model of a Rocket Ship">
+  <effect-composer id="selectiveComposer2" render-mode="quality">
+    <selective-bloom-effect  blend-mode="add" id="selectiveBloom2"  radius="0" threshold="0.6" smoothing="0"></selective-bloom-effect>
+    <color-grade-effect tonemapping="ACES_FILMIC" ></color-grade-effect>
+  </effect-composer> 
+
+  <script type="module">
+    const modelViewer = document.querySelector("model-viewer");
+
+    // Add a function to log material names
+    function logMaterialNames() {
+    
+    }
+
+    // Log material names when the model is fully loaded
+    modelViewer.addEventListener("load", logMaterialNames);
+
+    const selectiveComposer2 = document.querySelector("effect-composer#selectiveComposer2");
+    const selectiveBloom2 = selectiveComposer2.querySelector("selective-bloom-effect#selectiveBloom2");
+    const colorgrade = selectiveComposer2.querySelector("color-grade-effect#colorgrade");
+
+    selectiveComposer2.addEventListener('updated-selection', () => {
+  const selection = [];
+  selectiveComposer2.selection.forEach((obj) => {
+    // Check if the material has the name "Luces_frontales"
+    if (obj.material.name === 'Luces_frontales') {
+      selection.push(obj);
+    } else {
+      // Set the saturation of non-targeted materials to 1
+     
+       }
+  });
+  selectiveBloom2.selection = selection;
+ });
+
+
+const minStrength = 0;
+        const maxStrength = 0.1;
+        const animationTime = 5000; // in milliseconds
+ 
+        let startTime = null;
+
+        function animateSelectiveBloom(timestamp) {
+          if (!startTime) {
+            startTime = timestamp;
+          }
+          const elapsedTime = timestamp - startTime;
+          const t = elapsedTime / animationTime;
+          const s = Math.sin(2 * Math.PI * t);
+          selectiveBloom2.strength = minStrength + (maxStrength - minStrength) * s;
+          if (elapsedTime < animationTime) {
+            requestAnimationFrame(animateSelectiveBloom);
+          } else {
+            startTime = null;
+            requestAnimationFrame(animateSelectiveBloom);
+          }
+        }
+
+        requestAnimationFrame(animateSelectiveBloom);
+  </script>
+</model-viewer>
+
     </div>
-
-
 </body>
 
 </html>

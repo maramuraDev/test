@@ -19,7 +19,7 @@
 <!--       <video id="vid" src="./assets/360.mp4" muted crossorigin="anonymous"></video>
  -->    </a-assets>
 
-    <a-sky rotation="0 -90 0" src="#vid"></a-sky>
+    <a-sky rotation="0 180 0" src="#vid"></a-sky>
     <a-camera look-controls="enabled: true"></a-camera>
   </a-scene>
 
@@ -36,32 +36,33 @@
 
 
   <script>
-function requestPermission() {
-  var splashScreen = document.getElementById('app-container');
-          splashScreen.style.display = 'none';
-  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-    DeviceOrientationEvent.requestPermission()
-      .then(function (permissionState) {
-        if (permissionState === 'granted') {
-          var splashScreen = document.getElementById('app-container');
-          splashScreen.style.display = 'none';
-          document.querySelector('a-scene').setAttribute('embedded', true);
-          enableCameraControls();
-          closeCustomModal();
-        } else {
-          console.log('Permission denied. You won\'t be able to interact with the 360 video.');
-          // Perform actions on permission denied
-          closeCustomModal();
-        }
-      })
-      .catch(function (error) {
-        console.error(error);
-        closeCustomModal();
-      });
-  } else {
-    console.log('DeviceOrientationEvent.requestPermission is not supported in this browser.');
-  }
-}
+    function requestPermission() {
+      var splashScreen = document.getElementById('app-container');
+              splashScreen.style.display = 'none';
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission()
+          .then(function (permissionState) {
+            if (permissionState === 'granted') {
+            
+              var splashScreen = document.getElementById('app-container');
+              splashScreen.style.display = 'none';
+
+              enableCameraControls();
+              closeCustomModal();
+            } else {
+              console.log('Permission denied. You won\'t be able to interact with the 360 video.');
+              // Perform actions on permission denied
+              closeCustomModal();
+            }
+          })
+          .catch(function (error) {
+            console.error(error);
+            closeCustomModal();
+          });
+      } else {
+        console.log('DeviceOrientationEvent.requestPermission is not supported in this browser.');
+      }
+    }
 
     function enableCameraControls() {
       var camera = document.querySelector('a-camera');

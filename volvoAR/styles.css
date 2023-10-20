@@ -23,7 +23,7 @@
      left: 0;
      width: 100%;
      height: 100%;
-     background-color: #BAAF34;
+     background-color: #262626;
  }
 
  .background::after {
@@ -32,11 +32,12 @@
      height: 100%;
      position: absolute;
      background-size: auto 110%;
-     opacity: .6;
+     opacity: 1;
+     mix-blend-mode: multiply;
       background-position-y: 150%;
      background-position-x: -100px;
-/*      background-image: url("./assets/background.jpg");
- */ }
+     background-image: url("./assets/background.jpg");
+ }
 
  h1 {
      width: 80%;
@@ -46,12 +47,13 @@
      text-align: center;
      font-family: 'helvetica', sans-serif;
      font-weight: normal;
-     color: rgb(50, 50, 50);
+     color: rgb(189, 189, 189);
  }
 
  span{font-weight:600}
 
  .brand-logo {
+    filter: invert(1);
      width: 70%;
      height: 10%;
      top: 0%;
@@ -62,12 +64,28 @@
  /* Model Experience */
  model-viewer {
      width: 100%;
-     height: 80%;
-     top: 21%;
+      height: 70%;
+     top: 23%;
      left: 0%;
       overflow: hidden;
-      background-color: GRAY;
  }
+
+ #button1{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    border-radius: 100px;
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.672);
+     background-image: url("./assets/rotation.png");
+    bottom: 20px;
+    left: 20px;
+    border: none;
+    z-index: 3330000;
+    filter:invert(1);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
 
  .controls {
      display: flex;
@@ -91,11 +109,13 @@
  #model-4{background-color:#ffffff}
 
  #ar-button {
-     background-color: rgba(22, 22, 22, 0.758);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+
+     background-color: rgba(22, 22, 22, 0.639);
      left: 50%;
-     transform: translateX(-50%) scale(.7);
+     transform: translateX(-50%) scale(.8);
      white-space: nowrap;
-     top: 20%;
+     top: 3%;
      padding: 0px;
      font-family: Roboto Regular, Helvetica Neue, sans-serif;
      font-size: 14px;
@@ -103,8 +123,9 @@
      height: 33px;
      border: none;
      text-align: center;
-     width: 100px;
-     color: white;
+     width: 150px;
+     color: rgb(220, 220, 220);
+     position: absolute;
  }
 
  /* Video Experience */

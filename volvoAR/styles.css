@@ -111,7 +111,7 @@
  #ar-button {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
 
-     background-color: rgba(22, 22, 22, 0.639);
+     background-color: rgba(95, 95, 95, 0.639);
      left: 50%;
      transform: translateX(-50%) scale(.8);
      white-space: nowrap;
@@ -150,7 +150,7 @@ a-scene{
  }
 
  #custom-modal h2 {
-     font-size: 24px;
+     font-size: 22px;
      margin-bottom: 10px;
  }
 

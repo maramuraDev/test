@@ -37,7 +37,8 @@
   <script>
     function requestPermission() {
     
-
+      var splashScreen = document.getElementById('app-container');
+              splashScreen.classList.add('revealed');
       if (typeof DeviceOrientationEvent.requestPermission === 'function') {
         DeviceOrientationEvent.requestPermission()
           .then(function (permissionState) {

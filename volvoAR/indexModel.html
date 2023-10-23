@@ -8,43 +8,83 @@
   <title>VOLVO EXPERIENCIA AR</title>
   <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
   <script type="importmap">{ "imports":{ "three": "https://cdn.jsdelivr.net/npm/three@^0.156.1/build/three.module.min.js"}}</script>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>  <script type="module" src=" https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js "></script>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Work+Sans:wght@200&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <style>
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 9999;
+      filter: invert(1);
+    }
+
+    .spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60px;
+      height: 60px;
+      margin: -30px 0 0 -30px;
+      border-radius: 50%;
+      border: 5px solid rgba(0, 0, 0, .1);
+      border-top-color: #000;
+      animation: spin .6s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    #app-container {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
+
   <div id="app-container" class="block">
     <div class="background block"></div>
     <div class="brand-logo block"></div>
     <h1 class="block">Descubre el nuevo <span>EX30</span><br>presiona el boton para<br> activar<span> la experiencia</span></h1>
 
-    <model-viewer  loading="eager" ar-modes="webxr scene-viewer quick-look" id="hotspot-camera-view-demo" interaction-prompt="none" shadow-intensity="1.3" exposure=".8"
-      camera-orbit="35deg 90deg auto" camera-target="-1.5m 0m 0m" field-of-view="80deg"
-      environment-image="./assets/autoshop.hdr" autoplay src="./assets/latest23.glb" ar alt="maramura">
+    <model-viewer loading="eager" ar-modes="webxr scene-viewer quick-look" id="hotspot-camera-view-demo"
+      interaction-prompt="none" shadow-intensity="1.3" exposure=".8" camera-orbit="35deg 90deg auto"
+      camera-target="-1.5m 0m 0m" field-of-view="80deg" environment-image="./assets/autoshop.hdr" autoplay
+      src="./assets/latest23.glb" ar alt="maramura">
 
       <effect-composer id="selectiveComposer2" render-mode="quality">
-        <selective-bloom-effect id="selectiveBloom2" radius=".7" threshold="" smoothing=".5"></selective-bloom-effect>
+        <selective-bloom-effect id="selectiveBloom2" radius="0.5" threshold="" smoothing=".5"></selective-bloom-effect>
         <color-grade-effect></color-grade-effect>
       </effect-composer>
       <button slot="ar-button" id="ar-button"> Realidad Aumentada</button>
 
       <script type="module">
-
-document.addEventListener('DOMContentLoaded', () => {
-
         const modelViewer = document.querySelector("model-viewer");
 
         // Add a function to log material names
-        function logMaterialNames() {
+        function logMaterialNames() {}
 
-        }
-
-        // Log material names when the model is fully loaded
-        modelViewer.addEventListener("load", logMaterialNames);
+        // Hide the preloader and show the app container when the model is fully loaded
+        modelViewer.addEventListener("load", () => {
+          document.querySelector("#preloader").style.display = "none";
+          document.querySelector("#app-container").style.display = "block";
+          logMaterialNames();
+        });
 
         const selectiveComposer2 = document.querySelector("effect-composer#selectiveComposer2");
         const selectiveBloom2 = selectiveComposer2.querySelector("selective-bloom-effect#selectiveBloom2");
@@ -55,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
           selectiveComposer2.selection.forEach((obj) => {
             // Check if the material has emissive color with a red component greater than 0
             // or if the material has the name "light"
-            if (obj.material.name === 'Luces_frontales'|| obj.material.name === 'Material.001') {
+            if (obj.material.name === 'Luces_frontales' || obj.material.name === 'Material.001') {
               selection.push(obj);
             }
           });
@@ -64,10 +104,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const modelViewer2 = document.querySelector("#hotspot-camera-view-demo");
         const button = document.querySelector("#button1");
-        const cameraPositions = [
-          { orbit: "0deg 90deg auto", target: "0m 0m 0m", fov: "80deg" },
-          { orbit: "180deg 90deg auto", target: "0m 0m 0m", fov: "80deg" },
-          { orbit: "35deg 90deg auto", target: "-1.5m 0m 0m", fov: "80deg" },
+        const cameraPositions = [{
+            orbit: "0deg 90deg auto",
+            target: "0m 0m 0m",
+            fov: "80deg"
+          },
+          {
+            orbit: "180deg 90deg auto",
+            target: "0m 0m 0m",
+            fov: "80deg"
+          },
+          {
+            orbit: "35deg 90deg auto",
+            target: "-1.5m 0m 0m",
+            fov: "80deg"
+          },
         ];
         let currentPositionIndex = 0;
 
@@ -90,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if (currentPositionIndex === 2) {
             // Set a different max strength value for the third click and position of the model
             maxStrength = 10;
-
           }
 
           function animateSelectiveBloom() {
@@ -119,8 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
             selectiveBloom2.strength = 0;
           }, 1000);
         });
-      });
-
       </script>
     </model-viewer>
 

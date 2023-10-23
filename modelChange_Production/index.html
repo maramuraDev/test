@@ -180,13 +180,18 @@
 <body>
   <div class="banner block">
     <img id="dartUrl_dc" class="block"></img>
+   
+   
     <model-viewer id="phone" class="block" environment-image="autoshop.hdr" camera-controls touch-action="pan-y"
       camera-orbit="45deg 80deg auto"
         camera-controls camera-orbit="0m 0m 0m" field-of-view="8deg" camera-target="0m -.5m 0m"
         max-camera-orbit="auto 90deg auto" 
         min-camera-orbit="auto auto auto"  src="./campModel.glb" ar ar-modes="webxr scene-viewer quick-look">
-      <button slot="ar-button" id="ar-button"></button>
-      <div class="controls block">
+      
+        <button slot="ar-button" id="ar-button"></button>
+      
+      
+        <div class="controls block">
         <button id="model-1"> </button>
         <button id="model-2"> </button>
         <button id="model-3"> </button>

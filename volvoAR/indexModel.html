@@ -23,7 +23,7 @@
     <div class="brand-logo block"></div>
     <h1 class="block">Descubre el nuevo <span>EX30</span><br>presiona el boton para<br> activar<span> la experiencia</span></h1>
 
-    <model-viewer webxr scene-viewer quick-look id="hotspot-camera-view-demo" interaction-prompt="none" shadow-intensity="1.3" exposure=".8"
+    <model-viewer ar-modes= "webxr scene-viewer quick-look" id="hotspot-camera-view-demo" interaction-prompt="none" shadow-intensity="1.3" exposure=".8"
       camera-orbit="35deg 90deg auto" camera-target="-1.5m 0m 0m" field-of-view="80deg"
       environment-image="./assets/autoshop.hdr" autoplay src="./assets/latest_f.glb" ar alt="maramura">
 
@@ -37,13 +37,13 @@
         const modelViewer = document.querySelector("model-viewer");
 
         // Add a function to log material names
-        function logMaterialNames() {
+        /* function logMaterialNames() {
 
         }
-
+ */
         // Log material names when the model is fully loaded
-        modelViewer.addEventListener("load", logMaterialNames);
-
+/*         modelViewer.addEventListener("load", logMaterialNames);
+ */
    /*      const selectiveComposer2 = document.querySelector("effect-composer#selectiveComposer2");
         const selectiveBloom2 = selectiveComposer2.querySelector("selective-bloom-effect#selectiveBloom2");
         selectiveBloom2.strength = 0; // Set initial strength to 0
@@ -60,7 +60,7 @@
           selectiveBloom2.selection = selection;
         }); */
 
-        const modelViewer2 = document.querySelector("#hotspot-camera-view-demo");
+    /*     const modelViewer2 = document.querySelector("#hotspot-camera-view-demo");
         const button = document.querySelector("#button1");
         const cameraPositions = [
           { orbit: "0deg 90deg auto", target: "0m 0m 0m", fov: "80deg" },
@@ -74,7 +74,7 @@
           modelViewer2.cameraOrbit = currentPosition.orbit;
           modelViewer2.cameraTarget = currentPosition.target;
           modelViewer2.fieldOfView = currentPosition.fov;
-          currentPositionIndex = (currentPositionIndex + 1) % cameraPositions.length;
+          currentPositionIndex = (currentPositionIndex + 1) % cameraPositions.length; */
 
         /*   // Your animation code here
           let increasing = true;
@@ -116,7 +116,7 @@
             clearTimeout(timeoutId);
             selectiveBloom2.strength = 0;
           }, 1000); */
-        });
+      /*   }); */
       </script>
     </model-viewer>
 

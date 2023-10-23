@@ -13,7 +13,7 @@
 <body>
   <a-scene device-orientation-permission-ui="enabled: false" vr-mode-ui="enabled: false">
     <a-assets>
-      <img id="vid" src="./assets/sala.png">
+      <img id="vid" src="./assets/sala.jpg">
 
 <!--       <video id="vid" src="./assets/360.mp4" muted crossorigin="anonymous"></video>
  -->    </a-assets>
@@ -37,14 +37,15 @@
   <script>
     function requestPermission() {
       var splashScreen = document.getElementById('app-container');
-              splashScreen.style.display = 'none';
+      splashScreen.classList.add('revealed');
+
       if (typeof DeviceOrientationEvent.requestPermission === 'function') {
         DeviceOrientationEvent.requestPermission()
           .then(function (permissionState) {
             if (permissionState === 'granted') {
             
               var splashScreen = document.getElementById('app-container');
-              splashScreen.style.display = 'none';
+              splashScreen.classList.add('revealed');
 
               enableCameraControls();
               closeCustomModal();

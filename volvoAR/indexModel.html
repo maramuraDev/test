@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>VOLVO EXPERIENCIA AR</title>
-  <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
-<!--   <script type="importmap">{ "imports":{ "three": "https://cdn.jsdelivr.net/npm/three@^0.156.1/build/three.module.min.js"}}</script>
+<!--   <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
+ --><!--   <script type="importmap">{ "imports":{ "three": "https://cdn.jsdelivr.net/npm/three@^0.156.1/build/three.module.min.js"}}</script>
  -->  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script> 
 <!--    <script type="module" src=" https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js "></script>
  -->  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,20 +27,13 @@
       camera-orbit="35deg 90deg auto" camera-target="-1.5m 0m 0m" field-of-view="80deg"
       environment-image="./assets/autoshop.hdr" autoplay src="./assets/latest_f.glb" ar alt="maramura">
 
-      <effect-composer id="selectiveComposer2" render-mode="quality">
+<!--       <effect-composer id="selectiveComposer2" render-mode="quality">
         <selective-bloom-effect id="selectiveBloom2" radius=".7" threshold="" smoothing=".5"></selective-bloom-effect>
         <color-grade-effect></color-grade-effect>
-      </effect-composer>
+      </effect-composer> -->
       <button slot="ar-button" id="ar-button"> Realidad Aumentada</button>
 
       <script type="module">
-
-document.addEventListener('DOMContentLoaded', () => {
-  const headers = new Headers({
-    'Permissions-Policy': ''
-  });
-  fetch(window.location.href, { headers });
-});
         const modelViewer = document.querySelector("model-viewer");
 
         // Add a function to log material names
@@ -51,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Log material names when the model is fully loaded
         modelViewer.addEventListener("load", logMaterialNames);
 
-        const selectiveComposer2 = document.querySelector("effect-composer#selectiveComposer2");
+   /*      const selectiveComposer2 = document.querySelector("effect-composer#selectiveComposer2");
         const selectiveBloom2 = selectiveComposer2.querySelector("selective-bloom-effect#selectiveBloom2");
         selectiveBloom2.strength = 0; // Set initial strength to 0
 
@@ -65,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           });
           selectiveBloom2.selection = selection;
-        });
+        }); */
 
         const modelViewer2 = document.querySelector("#hotspot-camera-view-demo");
         const button = document.querySelector("#button1");
@@ -83,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
           modelViewer2.fieldOfView = currentPosition.fov;
           currentPositionIndex = (currentPositionIndex + 1) % cameraPositions.length;
 
-          // Your animation code here
+        /*   // Your animation code here
           let increasing = true;
           let strength = 0;
           let maxStrength = .4;
@@ -122,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             clearTimeout(timeoutId);
             selectiveBloom2.strength = 0;
-          }, 1000);
+          }, 1000); */
         });
       </script>
     </model-viewer>

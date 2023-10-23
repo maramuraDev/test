@@ -16,10 +16,10 @@
             width: 100vw;
             height: 100vh;
             background-color: rgb(27, 27, 27);
-            background-image: url("./assets/gradient2.svg");
+            background-image: url("./assets/back.jpg");
             flex-direction: column;
             background-repeat: no-repeat;
-            background-size: contain;
+            background-size: cover;
             justify-content: center;
             align-items: center;
             z-index: 9999;
@@ -94,6 +94,7 @@
 
         .active .flex-xr {
             opacity: 1;
+            transition: .5s;
         }
 
         .logo-animation {
@@ -103,7 +104,7 @@
             top: 0%;
             z-index: 99999;
             left: 0;
-            background-image: url("./assets/new.gif");
+            background-image: url("./assets/161023_VOLVO_SPLASH1.gif");
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -134,7 +135,7 @@
         window.onload = function () {
             setTimeout(function () {
                 document.body.classList.add('active');
-            }, 3500);
+            }, 3000);
         };
     </script>
 </body>

@@ -56,8 +56,8 @@
  h1 {
      width: 80%;
      left: 10%;
-     top: 8%;
-     font-size: 6vw;
+     top: 9%;
+     font-size: 4.5vw;
      text-align: center;
      font-family: 'helvetica', sans-serif;
      font-weight: normal;
@@ -68,10 +68,10 @@
 
  .brand-logo {
     filter: invert(1);
-     width: 70%;
+     width: 50%;
      height: 10%;
      top: 0%;
-     left: 15%;
+     left: 25%;
      background-image: url("./assets/volvo.svg");
  }
 
@@ -123,22 +123,22 @@
  #model-4{background-color:#ffffff}
 
  #ar-button {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+    box-shadow: rgba(0, 0, 0, 0.132) 0px 5px 15px; 
 
-     background-color: rgba(95, 95, 95, 0.639);
-     left: 50%;
+    background-color: rgb(185, 185, 185);
+    left: 50%;
      transform: translateX(-50%) scale(.8);
      white-space: nowrap;
-     top: 3%;
+     top: 0px;
      padding: 0px;
      font-family: Roboto Regular, Helvetica Neue, sans-serif;
      font-size: 14px;
      border-radius: 10px;
-     height: 33px;
+     height: 37px;
      border: none;
      text-align: center;
-     width: 150px;
-     color: rgb(220, 220, 220);
+     width: 160px;
+     color: rgb(0, 0, 0);
      position: absolute;
  }
 a-scene{

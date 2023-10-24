@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Work+Sans:wght@200&display=swap"
         rel="stylesheet">
     <style>
+        *{box-sizing: border-box;}
         #splash-screen {
             position: absolute;
             top: 0;
@@ -18,6 +19,7 @@
             background-color: rgb(27, 27, 27);
             background-image: url("./assets/back.jpg");
             flex-direction: column;
+            background-position: left;
             background-repeat: no-repeat;
             background-size: cover;
             justify-content: center;
@@ -41,10 +43,14 @@
             font-weight: lighter;
             color: white;
             font-size: 6vw;
+            opacity: 0;
+            z-index: 11111;
         }
 
         .active #splash-screen h1 {
             top: 87%;
+            opacity: 1;
+
         }
 
         h2 {
@@ -84,17 +90,16 @@
             justify-content: center;
             align-items: center;
             position: absolute;
-            top: 50%;
+            top: 40%;
             opacity: 0;
             transition: .6s;
             left: 50%;
             width: 90%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) scale(.93);
         }
 
         .active .flex-xr {
             opacity: 1;
-            transition: .5s;
         }
 
         .logo-animation {
@@ -104,14 +109,29 @@
             top: 0%;
             z-index: 99999;
             left: 0;
-            background-image: url("./assets/161023_VOLVO_SPLASH1.gif");
+            background-image: url("./assets/volver.gif");
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             pointer-events: none;
+            transform: scale(.5);
         }
 
-        .active .logo-animation {top: -30%;}
+        .brand-logo{
+              width:50%;
+            height: 120px;
+             bottom: 0%;
+            z-index: 99999;
+            left: 35%;
+            background-image: url("./assets/volvo.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            filter: invert(1);
+        }
+
+        .active .logo-animation {top: -40%;}
     </style>
 </head>
 
@@ -119,13 +139,16 @@
 
     <!-- Splash Screen (HTML overlay) -->
     <div id="splash-screen">
-        <div class="logo-animation"></div>
         <h1>Enjoy The Experience</h1>
+
+        <div class="logo-animation"></div>
         <div class="flex-xr">
-            <h2>Selecciona una experiencia</h2>
+            <div class="brand-logo block"></div>
+            <h2>Bienvenido!, selecciona una 
+                experiencia, para continuar</h2>
             <div class="button-flex">
-                <a href="./indexVideo.html"><button class="custom-button">Video 3D</button></a>
-                <a href="./indexModel.html"><button class="custom-button">AR 3D</button></a>
+                <a href="./indexVideo.html"><button class="custom-button">Garage 3D</button></a>
+                <a href="./indexModel.html"><button class="custom-button">Realidad Aumentada</button></a>
             </div>
         </div>
      </div>
@@ -136,7 +159,7 @@
         window.onload = function () {
             setTimeout(function () {
                 document.body.classList.add('active');
-            }, 3000);
+            }, 3800);
         };
     </script>
 </body>

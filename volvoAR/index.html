@@ -6,7 +6,7 @@
     <title>Custom Modal for 360 Video</title>
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Work+Sans:wght@200&display=swap"
         rel="stylesheet">
@@ -195,13 +195,13 @@
 </head>
 
 <body>
-
+ 
     <a-scene device-orientation-permission-ui="enabled: false" vr-mode-ui="enabled: false">
+            
         <a-assets>
-          <video id="vid" src="./assets/sala360.mp4" muted autoplay playsinline></video>
-
-       </a-assets>
-    
+            <!-- 360 video source -->
+            <video id="vid" src="./assets/sala3601.mp4" autoplay muted crossorigin="anonymous"/>
+          </a-assets>
         <a-sky rotation="0 -90 0" src="#vid" autoply muted></a-sky>
         <a-camera look-controls="enabled: true"></a-camera>
       </a-scene>
@@ -229,9 +229,13 @@
 
   
      <script>
+
+
+
         function requestPermission() {
            
-     
+            var v = document.querySelector('#vid');
+            v.play();
 
                   enableCameraControls();
                   closeCustomModal();
